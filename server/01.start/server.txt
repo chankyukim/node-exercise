@@ -1,0 +1,30 @@
+/*
+const os = require('os');
+console.log(os.type());
+console.log(os.version());
+console.log(os.homedir());
+*/
+
+/*
+const path = require('path');
+console.log(__dirname); //current folder
+console.log(__filename); //current file
+
+console.log(path.dirname(__filename)); //현재 작업하고 있는 파일이 속한 디렉토리의 이름을 출력
+console.log(path.basename(__filename)); //현재 작업하고 있는 파일 이름을 출력
+console.log(path.extname(__filename)); //현재 파일의 확장자를 출력해준다.
+
+console.log(path.parse(__filename)); //path.parse는 path를 말 그대로 파싱해준다.
+*/
+
+/*
+const math = require('./math');
+console.log(math.add(2, 3));
+*/
+
+/*
+const { add, subtract, multiply } = require('./math');
+console.log(add(2, 3));
+console.log(subtract(2, 3));
+console.log(multiply(2, 3));
+*/

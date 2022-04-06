@@ -1,0 +1,12 @@
+[
+  {
+    "username": "minkyu",
+    "password": "$2b$10$K1wedG.bdmuX7D.fQFFQ7uWLs0GWYMh5bJwCidN6wXV.wrPvg1pDC",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmt5dSIsImlhdCI6MTY0OTIzNzg1NCwiZXhwIjoxNjQ5MzI0MjU0fQ.NbF1f-NkiXizUhNCAxHGz1_3R08iNOqO7tiUsGQpPbY"
+  },
+  {
+    "username": "chank07",
+    "password": "$2b$10$ZhNZjXp83q7nn01rdf1mZ.ABGkyINlMnDebKRxmwcNBfSmHkPOBDW",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNoYW5rMDciLCJpYXQiOjE2NDkyMzc5ODIsImV4cCI6MTY0OTMyNDM4Mn0.AxoWFiiiL731vRLW2cjUJTy1F8vgeFE7WPeazYG40lc"
+  }
+]
