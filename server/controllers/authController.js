@@ -22,12 +22,17 @@ const handleLogin = async (req, res) => {
   //evaluate password
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (!match) return res.sendStatus(401);
-
+  const roles = Object.values(foundUser.roles); // [2001] 이런식
   //create JWT
   const accessToken = jwt.sign(
-    { username: foundUser.username }, //
+    {
+      UserInfo: {
+        username: foundUser.username,
+        roles,
+      },
+    }, //
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: '30s' }
+    { expiresIn: '1d' }
   );
   const refreshToken = jwt.sign(
     { username: foundUser.username }, //
@@ -44,7 +49,12 @@ const handleLogin = async (req, res) => {
     JSON.stringify(usersDB.users)
   );
 
-  res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+  res.cookie('jwt', refreshToken, {
+    httpOnly: true,
+    sameSite: 'None',
+    // secure: true,
+    maxAge: 24 * 60 * 60 * 1000, //1day
+  });
   res.json({ accessToken });
 };
 
