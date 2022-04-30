@@ -7,7 +7,6 @@ const corsOptions = require('./config/corsOptions');
 const verifyJWT = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3500; //process.env에 PORT가 있다면 PORT로, 아니라면 3500으로 속성에 값을 부여한다.
-const errorHandler = require('./middleware/errorHandler');
 const credentials = require('./middleware/credentials');
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
@@ -39,6 +38,7 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+app.use('/mail', require('./routes/mail'));
 
 app.use(verifyJWT);
 app.use('/employees', require('./routes/api/employees'));
