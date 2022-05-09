@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
-const MAIL_URL = '/mail';
+// const MAIL_URL = '/mail';
 
 const Register = () => {
   const userRef = useRef();
@@ -45,16 +45,16 @@ const Register = () => {
     setErrMsg('');
   }, [user, pwd, matchPwd]);
 
-  const handleMail = async () => {
-    try {
-      const response = await axios.post(MAIL_URL, JSON.stringify({ user }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleMail = async () => {
+  //   try {
+  //     const response = await axios.post(MAIL_URL, JSON.stringify({ user }), {
+  //       headers: { 'Content-Type': 'application/json' },
+  //       withCredentials: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -71,7 +71,7 @@ const Register = () => {
         withCredentials: true,
       });
       // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
+      // console.log(JSON.stringify(response?.data));
       //console.log(JSON.stringify(response))
       setSuccess(true);
       //clear state and controlled inputs
@@ -96,7 +96,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <Link to="/login">Sign In</Link>
           </p>
         </section>
       ) : (
@@ -124,7 +124,7 @@ const Register = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <button onClick={handleMail}>이메일 보내기</button>
+            {/* <button onClick={handleMail}>이메일 보내기</button> */}
             <p
               id="uidnote"
               className={userFocus && user && !validName ? 'instructions' : 'offscreen'}
@@ -202,7 +202,7 @@ const Register = () => {
             Already registered?
             <br />
             <span className="line">
-              <Link to="/">Sign In</Link>
+              <Link to="/login">Sign In</Link>
             </span>
           </p>
         </section>

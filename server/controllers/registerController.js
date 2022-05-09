@@ -1,3 +1,51 @@
+// mongoDB에 연결
+
+const User = require('../model/User');
+const bcrypt = require('bcrypt');
+
+const handleNewUser = async (req, res) => {
+  const { user, pwd } = req.body;
+  // console.log(user, pwd);
+
+  if (!user || !pwd)
+    return res.status(400).json({
+      message: 'Username and password are required.',
+    });
+
+  //check for duplicate username in the db
+  const duplicate = await User.findOne({ username: user }).exec();
+  // console.log('duplicate', duplicate);
+  if (duplicate) return res.sendStatus(409); //conflict
+
+  try {
+    //encrypt the password
+    const hashedPwd = await bcrypt.hash(pwd, 10);
+
+    //create and store the new user
+    const result = await User.create({
+      username: user,
+      password: hashedPwd,
+    });
+
+    // console.log('result', result);
+
+    //위의 코드를 다른 방식으로 db에 저장하는 법
+    // const newUser = new User({
+    //   username: user,
+    //   password: hashedPwd,
+    // });
+    // newUser.save();
+
+    // console.log('result', result);
+
+    res.status(201).json({ success: `New User ${user} created!` });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { handleNewUser };
+
 //mongoDB에 연결 안하고 json 파일을 DB로 사용했을 때
 
 // const usersDB = {
@@ -43,47 +91,3 @@
 // };
 
 // module.exports = { handleNewUser };
-
-// mongoDB에 연결
-
-const User = require('../model/User');
-const bcrypt = require('bcrypt');
-
-const handleNewUser = async (req, res) => {
-  const { user, pwd } = req.body;
-  if (!user || !pwd)
-    return res.status(400).json({
-      message: 'Username and password are required.',
-    });
-
-  //check for duplicate username in the db
-  const duplicate = await User.findOne({ username: user }).exec();
-  console.log('duplicate', duplicate);
-  if (duplicate) return res.sendStatus(409); //conflict
-
-  try {
-    //encrypt the password
-    const hashedPwd = await bcrypt.hash(pwd, 10);
-
-    //create and store the new user
-    const result = await User.create({
-      username: user,
-      password: hashedPwd,
-    });
-
-    //위의 코드를 다른 방식으로 db에 저장하는 법
-    // const newUser = new User({
-    //   username: user,
-    //   password: hashedPwd,
-    // });
-    // newUser.save();
-
-    console.log('result', result);
-
-    res.status(201).json({ success: `New User ${user} created!` });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-module.exports = { handleNewUser };
